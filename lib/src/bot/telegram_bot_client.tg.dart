@@ -19,12 +19,18 @@ class TelegramBotClientImpl extends TelegramBotClient {
         );
   }
 
-  Future<List<Update>> getUpdates({int offset, int limit, int timeout, List<String> allowedUpdates}) {
+  Future<List<Update>> getUpdates(
+      {int offset, int limit, int timeout, List<String> allowedUpdates}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'offset': offset, 'limit': limit, 'timeout': timeout, 'allowed_updates': allowedUpdates};
+    final _queries = <String, dynamic>{
+      'offset': offset,
+      'limit': limit,
+      'timeout': timeout,
+      'allowed_updates': allowedUpdates
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -32,9 +38,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     return _client
         .request(
-      '/getUpdates2',
+      '/getUpdates',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -42,11 +50,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
       ),
     )
         .then((response) {
-      return response.data.map((data) => Update.fromJson(data as Map<String, dynamic>)).toList();
+      return response.data
+          .map((data) => Update.fromJson(data as Map<String, dynamic>))
+          .toList();
     });
   }
 
-  Future<bool> setWebhook({String url, File certificate, int maxConnections, List<String> allowedUpdates}) {
+  Future<bool> setWebhook(
+      {String url,
+      File certificate,
+      int maxConnections,
+      List<String> allowedUpdates}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -67,6 +81,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setWebhook',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -94,7 +110,13 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/deleteWebhook',
       queryParameters: _queries,
       data: _data,
-      options: Options(method: 'GET', headers: _headers, contentType: null),
+      onSendProgress: null,
+      onReceiveProgress: null,
+      options: Options(
+        method: 'GET',
+        headers: _headers,
+        contentType: null,
+      ),
     )
         .then((response) {
       return response.data;
@@ -117,6 +139,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getWebhookInfo',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -144,6 +168,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getMe',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -186,6 +212,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendMessage',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -197,7 +225,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Message> forwardMessage({dynamic chatId, dynamic fromChatId, bool disableNotification, int messageId}) {
+  Future<Message> forwardMessage(
+      {dynamic chatId,
+      dynamic fromChatId,
+      bool disableNotification,
+      int messageId}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -218,6 +250,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/forwardMessage',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -260,6 +294,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendPhoto',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'POST',
         headers: _headers,
@@ -310,6 +346,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendAudio',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -354,6 +392,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendDocument',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -406,6 +446,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendVideo',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -456,6 +498,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendAnimation',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -500,6 +544,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendVoice',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -544,6 +590,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendVideoNote',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -555,7 +603,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Message> sendMediaGroup({dynamic chatId, List<dynamic> media, bool disableNotification, int replyToMessageId}) {
+  Future<Message> sendMediaGroup(
+      {dynamic chatId,
+      List<dynamic> media,
+      bool disableNotification,
+      int replyToMessageId}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -576,6 +628,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendMediaGroup',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -618,6 +672,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendLocation',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -630,7 +686,12 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<Message> editMessageLiveLocation(
-      {dynamic chatId, int messageId, String inlineMessageId, double latitude, double longitude, InlineKeyboardMarkup replyMarkup}) {
+      {dynamic chatId,
+      int messageId,
+      String inlineMessageId,
+      double latitude,
+      double longitude,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -653,6 +714,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/editMessageLiveLocation',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -664,7 +727,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Message> stopMessageLiveLocation({dynamic chatId, int messageId, String inlineMessageId, InlineKeyboardMarkup replyMarkup}) {
+  Future<Message> stopMessageLiveLocation(
+      {dynamic chatId,
+      int messageId,
+      String inlineMessageId,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -685,6 +752,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/stopMessageLiveLocation',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -733,6 +802,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendVenue',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -777,6 +848,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendContact',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -827,6 +900,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendPoll',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -854,6 +929,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendChatAction',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -865,12 +942,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<UserProfilePhotos> getUserProfilePhotos({int userId, int offset, int limit}) {
+  Future<UserProfilePhotos> getUserProfilePhotos(
+      {int userId, int offset, int limit}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'user_id': userId, 'offset': offset, 'limit': limit};
+    final _queries = <String, dynamic>{
+      'user_id': userId,
+      'offset': offset,
+      'limit': limit
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -881,6 +963,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getUserProfilePhotos',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -908,6 +992,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getFile',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -924,7 +1010,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'user_id': userId, 'until_date': untilDate};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'user_id': userId,
+      'until_date': untilDate
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -935,6 +1025,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/kickChatMember',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -962,6 +1054,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/unbanChatMember',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -973,12 +1067,21 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> restrictChatMember({dynamic chatId, int userId, ChatPermissions permissions, int untilDate}) {
+  Future<bool> restrictChatMember(
+      {dynamic chatId,
+      int userId,
+      ChatPermissions permissions,
+      int untilDate}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'user_id': userId, 'permissions': permissions, 'until_date': untilDate};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'user_id': userId,
+      'permissions': permissions,
+      'until_date': untilDate
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -989,6 +1092,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/restrictChatMember',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1037,6 +1142,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/promoteChatMember',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1048,12 +1155,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> setChatAdministratorCustomTitle({dynamic chatId, int userId, String customTitle}) {
+  Future<bool> setChatAdministratorCustomTitle(
+      {dynamic chatId, int userId, String customTitle}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'user_id': userId, 'custom_title': customTitle};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'user_id': userId,
+      'custom_title': customTitle
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1064,6 +1176,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatAdministratorCustomTitle',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1075,12 +1189,16 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> setChatPermissions({dynamic chatId, ChatPermissions permissions}) {
+  Future<bool> setChatPermissions(
+      {dynamic chatId, ChatPermissions permissions}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'permissions': permissions};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'permissions': permissions
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1091,6 +1209,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatPermissions',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1118,6 +1238,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/exportChatInviteLink',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1145,6 +1267,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatPhoto',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1172,6 +1296,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/deleteChatPhoto',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1199,6 +1325,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatTitle',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1215,7 +1343,10 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'description': description};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'description': description
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1226,6 +1357,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatDescription',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1237,12 +1370,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> pinChatMessage({dynamic chatId, int messageId, bool disableNotification}) {
+  Future<bool> pinChatMessage(
+      {dynamic chatId, int messageId, bool disableNotification}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'message_id': messageId, 'disable_notification': disableNotification};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'message_id': messageId,
+      'disable_notification': disableNotification
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1253,6 +1391,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/pinChatMessage',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1280,6 +1420,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/unpinChatMessage',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1307,6 +1449,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/leaveChat',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1334,6 +1478,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getChat',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1361,6 +1507,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getChatAdministrators',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1368,7 +1516,9 @@ class TelegramBotClientImpl extends TelegramBotClient {
       ),
     )
         .then((response) {
-      return response.data.map((data) => ChatMember.fromJson(data as Map<String, dynamic>)).toList();
+      return response.data
+          .map((data) => ChatMember.fromJson(data as Map<String, dynamic>))
+          .toList();
     });
   }
 
@@ -1388,6 +1538,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getChatMembersCount',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1415,6 +1567,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getChatMember',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1431,7 +1585,10 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'sticker_set_name': stickerSetName};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'sticker_set_name': stickerSetName
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1442,6 +1599,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setChatStickerSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1469,6 +1628,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/deleteChatStickerSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1480,7 +1641,12 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> answerCallbackQuery({String callbackQueryId, String text, bool showAlert, String url, int cacheTime}) {
+  Future<bool> answerCallbackQuery(
+      {String callbackQueryId,
+      String text,
+      bool showAlert,
+      String url,
+      int cacheTime}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1502,6 +1668,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/answerCallbackQuery',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1544,6 +1712,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/editMessageText',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1556,7 +1726,12 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<Message> editMessageCaption(
-      {dynamic chatId, int messageId, String inlineMessageId, String caption, String parseMode, InlineKeyboardMarkup replyMarkup}) {
+      {dynamic chatId,
+      int messageId,
+      String inlineMessageId,
+      String caption,
+      String parseMode,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1579,6 +1754,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/editMessageCaption',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1591,7 +1768,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<Message> editMessageMedia(
-      {dynamic chatId, int messageId, String inlineMessageId, InputMedia media, InlineKeyboardMarkup replyMarkup}) {
+      {dynamic chatId,
+      int messageId,
+      String inlineMessageId,
+      InputMedia media,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1613,6 +1794,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/editMessageMedia',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1624,7 +1807,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Message> editMessageReplyMarkup({dynamic chatId, int messageId, String inlineMessageId, InlineKeyboardMarkup replyMarkup}) {
+  Future<Message> editMessageReplyMarkup(
+      {dynamic chatId,
+      int messageId,
+      String inlineMessageId,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1645,6 +1832,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/editMessageReplyMarkup',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1656,12 +1845,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Poll> stopPoll({dynamic chatId, int messageId, InlineKeyboardMarkup replyMarkup}) {
+  Future<Poll> stopPoll(
+      {dynamic chatId, int messageId, InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'message_id': messageId, 'reply_markup': replyMarkup};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'message_id': messageId,
+      'reply_markup': replyMarkup
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1672,6 +1866,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/stopPoll',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1688,7 +1884,10 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'chat_id': chatId, 'message_id': messageId};
+    final _queries = <String, dynamic>{
+      'chat_id': chatId,
+      'message_id': messageId
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1699,6 +1898,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/deleteMessage',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1710,7 +1911,12 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<Message> sendSticker({dynamic chatId, String sticker, bool disableNotification, int replyToMessageId, dynamic replyMarkup}) {
+  Future<Message> sendSticker(
+      {dynamic chatId,
+      String sticker,
+      bool disableNotification,
+      int replyToMessageId,
+      dynamic replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1732,6 +1938,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendSticker',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1759,6 +1967,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getStickerSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1775,7 +1985,10 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'user_id': userId, 'png_sticker': pngSticker};
+    final _queries = <String, dynamic>{
+      'user_id': userId,
+      'png_sticker': pngSticker
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1786,6 +1999,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/uploadStickerFile',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1798,7 +2013,13 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<bool> createNewStickerSet(
-      {int userId, String name, String title, String pngSticker, String emojis, bool containsMasks, MaskPosition maskPosition}) {
+      {int userId,
+      String name,
+      String title,
+      String pngSticker,
+      String emojis,
+      bool containsMasks,
+      MaskPosition maskPosition}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1822,6 +2043,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/createNewStickerSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1833,7 +2056,12 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> addStickerToSet({int userId, String name, String pngSticker, String emojis, MaskPosition maskPosition}) {
+  Future<bool> addStickerToSet(
+      {int userId,
+      String name,
+      String pngSticker,
+      String emojis,
+      MaskPosition maskPosition}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -1855,6 +2083,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/addStickerToSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1871,7 +2101,10 @@ class TelegramBotClientImpl extends TelegramBotClient {
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'sticker': sticker, 'position': position};
+    final _queries = <String, dynamic>{
+      'sticker': sticker,
+      'position': position
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -1882,6 +2115,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setStickerPositionInSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1909,6 +2144,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/deleteStickerFromSet',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -1951,6 +2188,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/answerInlineQuery',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2025,6 +2264,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendInvoice',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2036,7 +2277,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> answerShippingQuery({String shippingQueryId, bool ok, List<ShippingOption> shippingOptions, String errorMessage}) {
+  Future<bool> answerShippingQuery(
+      {String shippingQueryId,
+      bool ok,
+      List<ShippingOption> shippingOptions,
+      String errorMessage}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -2057,6 +2302,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/answerShippingQuery',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2068,12 +2315,17 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> answerPreCheckoutQuery({String preCheckoutQueryId, bool ok, String errorMessage}) {
+  Future<bool> answerPreCheckoutQuery(
+      {String preCheckoutQueryId, bool ok, String errorMessage}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'pre_checkout_query_id': preCheckoutQueryId, 'ok': ok, 'error_message': errorMessage};
+    final _queries = <String, dynamic>{
+      'pre_checkout_query_id': preCheckoutQueryId,
+      'ok': ok,
+      'error_message': errorMessage
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -2084,6 +2336,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/answerPreCheckoutQuery',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2095,7 +2349,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<bool> setPassportDataErrors({int userId, List<PassportElementError> errors}) {
+  Future<bool> setPassportDataErrors(
+      {int userId, List<PassportElementError> errors}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -2111,6 +2366,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setPassportDataErrors',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2123,7 +2380,11 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<Message> sendGame(
-      {int chatId, String gameShortName, bool disableNotification, int replyToMessageId, InlineKeyboardMarkup replyMarkup}) {
+      {int chatId,
+      String gameShortName,
+      bool disableNotification,
+      int replyToMessageId,
+      InlineKeyboardMarkup replyMarkup}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -2145,6 +2406,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/sendGame',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2157,7 +2420,13 @@ class TelegramBotClientImpl extends TelegramBotClient {
   }
 
   Future<Message> setGameScore(
-      {int userId, int score, bool force, bool disableEditMessage, int chatId, int messageId, String inlineMessageId}) {
+      {int userId,
+      int score,
+      bool force,
+      bool disableEditMessage,
+      int chatId,
+      int messageId,
+      String inlineMessageId}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
@@ -2181,6 +2450,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/setGameScore',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2192,12 +2463,18 @@ class TelegramBotClientImpl extends TelegramBotClient {
     });
   }
 
-  Future<List<GameHighScore>> getGameHighScores({int userId, int chatId, int messageId, String inlineMessageId}) {
+  Future<List<GameHighScore>> getGameHighScores(
+      {int userId, int chatId, int messageId, String inlineMessageId}) {
     final _headers = <String, dynamic>{};
 
     _headers.removeWhere((k, v) => v == null);
 
-    final _queries = <String, dynamic>{'user_id': userId, 'chat_id': chatId, 'message_id': messageId, 'inline_message_id': inlineMessageId};
+    final _queries = <String, dynamic>{
+      'user_id': userId,
+      'chat_id': chatId,
+      'message_id': messageId,
+      'inline_message_id': inlineMessageId
+    };
 
     _queries.removeWhere((k, v) => v == null);
 
@@ -2208,6 +2485,8 @@ class TelegramBotClientImpl extends TelegramBotClient {
       '/getGameHighScores',
       queryParameters: _queries,
       data: _data,
+      onSendProgress: null,
+      onReceiveProgress: null,
       options: Options(
         method: 'GET',
         headers: _headers,
@@ -2215,7 +2494,9 @@ class TelegramBotClientImpl extends TelegramBotClient {
       ),
     )
         .then((response) {
-      return response.data.map((data) => GameHighScore.fromJson(data as Map<String, dynamic>)).toList();
+      return response.data
+          .map((data) => GameHighScore.fromJson(data as Map<String, dynamic>))
+          .toList();
     });
   }
 }

@@ -10,7 +10,7 @@ part 'telegram_bot_client.tg.dart';
 
 @Trident()
 abstract class TelegramBotClient {
-  @GET("/getUpdates2")
+  @GET("/getUpdates")
   Future<List<Update>> getUpdates(
       {@Query("offset") int offset,
       @Query("limit") int limit,
